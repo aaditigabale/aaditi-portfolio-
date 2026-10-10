@@ -1,3 +1,4 @@
+
 {
   "name": "aaditi-gabale-portfolio",
   "private": true,
@@ -6,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -15,6 +18,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "gh-pages": "^6.2.0",
     "vite": "^6.0.5"
   }
 }
