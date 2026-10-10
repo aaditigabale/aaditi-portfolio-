@@ -1,9 +1,13 @@
+
 import React, { useState } from 'react';
 import {
-  ArrowDownRight, ArrowRight, ArrowUpRight, Menu, X, Github, Linkedin,
-  Mail, Phone, Code2, GraduationCap, Sparkles, CheckCircle2, ExternalLink,
+  ArrowDownRight, ArrowUpRight, Menu, X, Github, Linkedin,
+  Mail, Code2, GraduationCap, Sparkles, CheckCircle2, ExternalLink,
   Braces, Layers3, Users, HeartHandshake, BriefcaseBusiness
 } from 'lucide-react';
+
+const BASE = import.meta.env.BASE_URL;
+const resume = `${BASE}Aaditi-Gabale-Resume.pdf`;
 
 const profile = {
   name: 'Aaditi Gabale',
@@ -28,8 +32,7 @@ const projects = [
     ],
     tags: ['Healthcare', 'Queue Management', 'Workflow Design'],
     liveDemo: 'https://krushnalp2007-cloud.github.io/hospital-queue-management-system/',
-    image: '/project-images/mediqueue.png',
-    symbol: 'M'
+    image: `${BASE}project-images/mediqueue.png`
   },
   {
     number: '02',
@@ -44,8 +47,7 @@ const projects = [
       'Designed around reducing manual checkout effort'
     ],
     tags: ['Retail', 'Checkout Experience', 'Automation'],
-    image: '/project-images/smart-cart.png',
-    symbol: 'S'
+    image: `${BASE}project-images/smart-cart.png`
   },
   {
     number: '03',
@@ -60,8 +62,7 @@ const projects = [
       'Exploring a unified product and price comparison experience'
     ],
     tags: ['JavaScript', 'Product Discovery', 'Decision Support'],
-    image: '/project-images/shopping-sathi.png',
-    symbol: 'S'
+    image: `${BASE}project-images/shopping-sathi.png`
   }
 ];
 
@@ -133,6 +134,7 @@ function App() {
             <span className="wordmark-mark">AG</span>
             <span>Aaditi Gabale<span className="wordmark-dot">.</span></span>
           </a>
+
           <button
             className="menu-toggle"
             aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -141,12 +143,17 @@ function App() {
           >
             {menuOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
+
           <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
             {navItems.map(([label, href]) => (
               <a key={label} href={href} onClick={closeMenu}>{label}</a>
             ))}
-            <a className="nav-resume" href="/Aaditi-Gabale-Resume.pdf" target="_blank" rel="noreferrer" onClick={closeMenu}><ExternalLink size={14} /> Resume PDF</a>
-            <a className="nav-cta" href="#contact" onClick={closeMenu}>Let’s connect <ArrowUpRight size={15} /></a>
+            <a className="nav-resume" href={resume} target="_blank" rel="noreferrer" onClick={closeMenu}>
+              <ExternalLink size={14} /> Resume PDF
+            </a>
+            <a className="nav-cta" href="#contact" onClick={closeMenu}>
+              Let’s connect <ArrowUpRight size={15} />
+            </a>
           </nav>
         </div>
       </header>
@@ -154,15 +161,22 @@ function App() {
       <main id="main">
         <section className="hero section-wrap" id="home">
           <div className="hero-copy">
-            <div className="availability"><span className="availability-dot" /> Computer Science student · Open to learning opportunities</div>
+            <div className="availability">
+              <span className="availability-dot" />
+              Computer Science student · Open to learning opportunities
+            </div>
             <p className="hero-kicker">HELLO, I’M AADITI</p>
             <h1>Turning ideas into<br /><span>thoughtful digital</span><br />experiences.</h1>
             <p className="hero-intro">
               I’m a Computer Science and Engineering student at Kolhapur Institute of Technology, interested in building useful digital products and improving how people interact with technology. Through academic projects, hackathons, and collaborative experiences, I’m developing my technical foundation, problem-solving approach, and ability to turn ideas into practical solutions.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#projects">Explore my work <ArrowDownRight size={17} /></a>
-              <a className="button button-secondary" href="/Aaditi-Gabale-Resume.pdf" target="_blank" rel="noreferrer">View resume <ExternalLink size={16} /></a>
+              <a className="button button-primary" href="#projects">
+                Explore my work <ArrowDownRight size={17} />
+              </a>
+              <a className="button button-secondary" href={resume} target="_blank" rel="noreferrer">
+                View resume <ExternalLink size={16} />
+              </a>
             </div>
             <div className="hero-socials" aria-label="Social links">
               <a href={profile.github} target="_blank" rel="noreferrer"><Github size={17} /> GitHub <ArrowUpRight size={13} /></a>
@@ -216,7 +230,9 @@ function App() {
             {projects.map((project) => (
               <article className="project-card" key={project.number}>
                 <div className="project-number">{project.number}</div>
-                <div className="project-visual"><img className="project-preview" src={project.image} alt={`${project.name} project screenshot`} loading="lazy" /></div>
+                <div className="project-visual">
+                  <img className="project-preview" src={project.image} alt={`${project.name} project screenshot`} loading="lazy" />
+                </div>
                 <div className="project-content">
                   <div className="project-title-row">
                     <div>
@@ -227,10 +243,20 @@ function App() {
                   </div>
                   <p className="project-description">{project.description}</p>
                   <ul className="project-highlights">
-                    {project.highlights.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}
+                    {project.highlights.map((item) => (
+                      <li key={item}><CheckCircle2 size={15} />{item}</li>
+                    ))}
                   </ul>
-                  <div className="tag-row">{project.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div>
-                  {project.liveDemo && <div className="project-actions"><a className="button button-secondary" href={project.liveDemo} target="_blank" rel="noreferrer">Live demo <ExternalLink size={15} /></a></div>}
+                  <div className="tag-row">
+                    {project.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}
+                  </div>
+                  {project.liveDemo && (
+                    <div className="project-actions">
+                      <a className="button button-secondary" href={project.liveDemo} target="_blank" rel="noreferrer">
+                        Live demo <ExternalLink size={15} />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}
@@ -248,7 +274,11 @@ function App() {
                   <article className="skill-card" key={group.title}>
                     <div className="skill-card-top"><span className="skill-icon"><Icon size={19} /></span><span className="skill-index">0{index + 1}</span></div>
                     <h3>{group.title}</h3>
-                    <div className="skill-tags">{group.skills.map(skill => <span key={skill} className={skill.startsWith('Learning') || skill.startsWith('Exploring') ? 'skill-tag learning' : 'skill-tag'}>{skill}</span>)}</div>
+                    <div className="skill-tags">
+                      {group.skills.map(skill => (
+                        <span key={skill} className={skill.startsWith('Learning') || skill.startsWith('Exploring') ? 'skill-tag learning' : 'skill-tag'}>{skill}</span>
+                      ))}
+                    </div>
                   </article>
                 );
               })}
@@ -328,7 +358,7 @@ function App() {
         <div className="section-wrap footer-inner">
           <a href="#home" className="wordmark footer-wordmark"><span className="wordmark-mark">AG</span><span>Aaditi Gabale<span className="wordmark-dot">.</span></span></a>
           <p>Designed with intention. Built while learning.</p>
-          <a className="back-top" href="/Aaditi-Gabale-Resume.pdf" target="_blank" rel="noreferrer">Resume PDF <ExternalLink size={13} /></a>
+          <a className="back-top" href={resume} target="_blank" rel="noreferrer">Resume PDF <ExternalLink size={13} /></a>
           <a className="back-top" href="#home">Back to top <ArrowUpRight size={14} /></a>
           <span className="copyright">© {new Date().getFullYear()} Aaditi Gabale</span>
         </div>
